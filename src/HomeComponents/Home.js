@@ -47,7 +47,7 @@ export default function Home(props) {
             {referrer? 
             <Link 
             style={boxstyle} 
-            to={`/main/:${referrer}`}>ENTER NOW</Link> 
+            to={`/main/${referrer}`}>ENTER NOW</Link> 
             
             :<Link 
             style={boxstyle}

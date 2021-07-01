@@ -225,9 +225,9 @@ const setSellValue = (e) => {
                 
                 </span>
                 <span>
-                  <h2>${(referralBalance/1000000000000000000).toFixed(2) }</h2><br/>
-                  <p>Your Referral Earnings Value: {(referralBalance/1000000000000000000*props.price).toFixed(2) } BNB</p>
-                  <button onClick={()=>{withdrawReferral(referralBalance.value)}}>withdraw referral</button>
+                  <h2>${(referralBalance/1000000000000000000*props.price).toFixed(2) }</h2><br/>
+                  <p>Your Referral Earnings Value: {referralBalance/1000000000000000000 } BNB</p>
+                  <button onClick={()=>{withdrawReferral(referralBalance)}}>withdraw referral</button>
                 </span>
                   </div>
                  
