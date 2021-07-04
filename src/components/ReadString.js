@@ -2,8 +2,8 @@ import { number } from 'assert-plus'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv } from '../store/adoptSlice';
-
-
+//import BigNumber from 'big-number'
+import progress from '../img/progress.gif'
 export default function ReadString(props) {
 
      const [success,setCopySuccess] = useState()
@@ -37,6 +37,8 @@ export default function ReadString(props) {
       return Number(state.adoptReducer.dividendBalance);
     });
 
+    console.log("divdend",dividendBalance)
+
     const referralBalance = useSelector((state)=>{
       return Number(state.adoptReducer.ReferralBalance);
     });
@@ -44,7 +46,11 @@ export default function ReadString(props) {
     const _holderPersonalEth = useSelector((state)=>{
       return Number(state.adoptReducer.holderPersonalEth);
     });
-    console.log("bal",_holderPersonalEth)
+
+    const web3 = useSelector((state)=>{
+      return state.adoptReducer.web3;
+    });
+    
 
     function stringFunction(amount){
       
@@ -120,7 +126,7 @@ function setChange(amount){
 
 const setSellValue = (e) => {
   e.preventDefault()
-  dispatch(SellFunction({value: sellAmount}))
+  dispatch(SellFunction({value: sellAmount*1000}))
   setSellAmount("")
 
   };
@@ -158,8 +164,8 @@ const setSellValue = (e) => {
 
   };
 
-  const withdrawReferral = (e) => {
-    e.preventDefault()
+  const withdrawReferral = () => {
+
 
     dispatch(WHReferral({value: referralBalance}))
 
@@ -167,7 +173,7 @@ const setSellValue = (e) => {
 
   const withdrawPersonalEth = (e) => {
     e.preventDefault()
-    console.log("balance",_holderPersonalEth)
+   
     dispatch(WHPersonalEth({value: _holderPersonalEth}))
 
   };
@@ -211,7 +217,7 @@ const setSellValue = (e) => {
 
 
                 <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF", minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
-                <h1 style={{margin:"1px"}}>{balance }</h1><br/>
+                <h1 style={{margin:"1px"}}>{balance/1000 }</h1><br/>
                 <h2 style={{margin:"1px"}}>Seek Gold Credits</h2><br/>
                 <p style={{margin:"1px"}}> My Seek Gold Credit Value </p>
                 <h2>${(balance*rate/1000000000000000000*props.price).toFixed(2) }</h2>
@@ -243,11 +249,11 @@ const setSellValue = (e) => {
                 <label> Amount of BNBs <br/>
                 <input value={Puramount} type="value"            
                   onChange={({ target }) => {setPurAmount(target.value)}}/></label><br/>
-                <p>You will get { (Puramount*1000000000000000000/rate*.75).toFixed(0) } number of tokens</p>
-                <p>Price BNB: {(rate/1000000000000000000).toFixed(8)}</p>
-                <p>Price Dollar: ${(rate/1000000000000000000*props.price).toFixed(8)}</p>
+                <p>You will get { (Puramount*1000000000000000/rate*.75).toFixed(0) } number of tokens</p>
+                <p>Price BNB: {(rate/1000000000000000).toFixed(5)}</p>
+                <p>Price Dollar: ${(rate/1000000000000000*props.price).toFixed(5)}</p>
                 <button onClick={setValue}>BUY BNB CREDITS</button>
-                <div>{getTxStatus()}</div>
+                {/* <div>{getTxStatus()}</div> */}
                 </div>
             
                 <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
@@ -256,11 +262,11 @@ const setSellValue = (e) => {
                   <input value={sellAmount} type="value" onChange={(e)=>{setChange(e.target.value)}}></input>
                 </label>
                 {amountExceeded? <p>You cannot sell more than your balance of {balance}</p>:
-                <p>You will get <strong>{(rate/1000000000000000000*.93*sellAmount).toFixed(4)}</strong> amount of BNBs based on current price</p>}
-                <p>Price BNB: {(rate/1000000000000000000).toFixed(8)}</p>
-                <p>Price Dollar: ${(rate/1000000000000000000*props.price).toFixed(8)}</p>
+                <p>You will get <strong>{(rate/1000000000000000*.93*sellAmount).toFixed(4)}</strong> amount of BNBs based on current price</p>}
+                <p>Price BNB: {(rate/1000000000000000).toFixed(5)}</p>
+                <p>Price Dollar: ${(rate/1000000000000000*props.price).toFixed(5)}</p>
                 <button disabled={amountExceeded} onClick={setSellValue}>Sell BNB CREDITS</button>
-                <div>{getSellTxStatus()}</div>
+                {/* <div>{getSellTxStatus()}</div> */}
                 </div>
 
                 <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
@@ -269,14 +275,15 @@ const setSellValue = (e) => {
                 <p>     Your personal eth balance in BNB is {(_holderPersonalEth/1000000000000000000).toFixed(2) }</p><br/>
                 <p>     Your personal eth balance in USD is ${(_holderPersonalEth/1000000000000000000*props.price).toFixed(2) }</p><br/>
                 <button onClick={withdrawPersonalEth}>withdraw PersonaBNBs</button>
-                <div>{getSellTxStatus()}</div>
+                {/* <div>{getSellTxStatus()}</div> */}
                 <br/>
 
 
         
                 </div>
+               
             </div>
-
+            <div>{getSellTxStatus()}</div> 
 
         
         </div>
