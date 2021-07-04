@@ -575,7 +575,7 @@ export const initWeb3 = createAsyncThunk(
                 await Web3.givenProvider.enable()
                 const networkId = await web3.eth.net.getId()
                 const SeekGoldAddress = GoldSeek.networks[networkId].address
-                var contract = new web3.eth.Contract(abi, SeekGoldAddress);
+                var contract = new web3.eth.Contract(GoldSeek.abi, SeekGoldAddress);
                 SeekGoldContract = contract;
                 const addresses = await web3.eth.getAccounts()
                 address = addresses[0];
@@ -598,6 +598,8 @@ export const initWeb3 = createAsyncThunk(
 )
 
 var dividendBalance2
+var holderPersonalEth2
+var referralBalance2
 export const balance = createAsyncThunk("balance",
     async ({contract, address})=>{
  
@@ -607,14 +609,18 @@ export const balance = createAsyncThunk("balance",
             const balance = await contract.methods._holderBalances(address).call()
             const ethStaked = await contract.methods.TotalEthStaked().call()
             const rate = await contract.methods.existingPrice().call()
+			const saleRate = await contract.methods.SaleexistingPrice().call()
             const initialTokenPrice = await contract.methods.tokenPriceInitial_().call()
             const dividendBalance = await contract.methods.dividendBalance(address).call()
             const ReferralBalance = await contract.methods.ReferralBalance(address).call()
             const holderPersonalEth = await contract.methods._holderPersonalEth(address).call()
 			dividendBalance2 = dividendBalance
+			holderPersonalEth2 = holderPersonalEth
+			referralBalance2 = ReferralBalance
+
 
             
-            return {balance,ethStaked,rate,initialTokenPrice,dividendBalance,ReferralBalance,holderPersonalEth}
+            return {balance,ethStaked,rate,saleRate,initialTokenPrice,dividendBalance,ReferralBalance,holderPersonalEth}
 
         } catch (error) {
             console.log("Error in ArrayThunk",error)
@@ -627,9 +633,11 @@ export const balance = createAsyncThunk("balance",
 
 export const BuyFunction = createAsyncThunk("BuyFunction",
     async ({referrer,value})=>{
-        
+        var tempAdd = referrer == address? '0x0000000000000000000000000000000000000000' : referrer
+		console.log("referrer",referrer)
+		console.log("tempadd",tempAdd)
        try {
-            const result = await SeekGoldContract.methods.buy(referrer).send({from : address, value: web3.utils.toWei(value,"ether")})
+            const result = await SeekGoldContract.methods.buy(tempAdd).send({from : address, value: web3.utils.toWei(value,"ether")})
             return result;
         } catch (error) {
             console.log("Error in BUy Function",error)
@@ -653,7 +661,7 @@ export const WHPersonalEth = createAsyncThunk("WHPersonalEth",
 async ({value})=>{
     console.log("per",value)
     try {
-        const result = await SeekGoldContract.methods.withdrawPersonalEth(value.toString()).send({from : address})
+        const result = await SeekGoldContract.methods.withdrawPersonalEth(holderPersonalEth2).send({from : address})
         return result;
     } catch (error) {
         console.log("Error in withdraw Function",error)
@@ -666,7 +674,19 @@ export const WHReferral = createAsyncThunk("WHReferral",
 async ({value})=>{
 
     try {
-        const result = await SeekGoldContract.methods.withdrawrReferral(value.toString()).send({from : address})
+        const result = await SeekGoldContract.methods.withdrawrReferral(referralBalance2).send({from : address})
+        return result;
+    } catch (error) {
+        console.log("Error in withdraw Function",error)
+    }
+}
+)
+
+export const reInvest = createAsyncThunk("reInvest",
+async ()=>{
+
+    try {
+        const result = await SeekGoldContract.methods.reinvest().send({from : address})
         return result;
     } catch (error) {
         console.log("Error in withdraw Function",error)
@@ -695,7 +715,8 @@ const adoptSlice = createSlice({
         web3: null,
         SeekGoldContract:null,
         address : null,
-        balance: null,          
+        balance: null,
+		saleRate:null,          
         arrayAwait : null,
         PurAwait : null,
         toggle: false,
@@ -730,7 +751,8 @@ const adoptSlice = createSlice({
             state.dividendBalance=action.payload.dividendBalance;
             state.ReferralBalance=action.payload.ReferralBalance;
             state.holderPersonalEth=action.payload.holderPersonalEth;
-            },
+            state.saleRate = action.payload.saleRate;
+		},
 
        
         [BuyFunction.pending] : (state,action)=>{
@@ -779,6 +801,15 @@ const adoptSlice = createSlice({
             state.toggle = !state.toggle;
         },
         [WHDiv.fulfilled] : (state,action)=>{
+            state.arrayAwait = false;
+            state.toggle = !state.toggle;
+
+        },
+		[reInvest.pending] : (state,action)=>{
+            state.arrayAwait = true;
+            state.toggle = !state.toggle;
+        },
+        [reInvest.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
 

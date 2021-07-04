@@ -1,7 +1,7 @@
 import { number } from 'assert-plus'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv } from '../store/adoptSlice';
+import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest } from '../store/adoptSlice';
 //import BigNumber from 'big-number'
 import progress from '../img/progress.gif'
 export default function ReadString(props) {
@@ -37,7 +37,7 @@ export default function ReadString(props) {
       return Number(state.adoptReducer.dividendBalance);
     });
 
-    console.log("divdend",dividendBalance)
+   
 
     const referralBalance = useSelector((state)=>{
       return Number(state.adoptReducer.ReferralBalance);
@@ -87,6 +87,9 @@ const setValue = (e) => {
   const arrayAwait = useSelector((state)=>{
     return state.adoptReducer.arrayAwait;
   });
+  const Salerate = useSelector((state)=>{
+    return Number(state.adoptReducer.saleRate)
+  });
 
   function showreferralFunction (){
     
@@ -126,7 +129,7 @@ function setChange(amount){
 
 const setSellValue = (e) => {
   e.preventDefault()
-  dispatch(SellFunction({value: sellAmount*1000}))
+  dispatch(SellFunction({value: sellAmount}))
   setSellAmount("")
 
   };
@@ -178,6 +181,12 @@ const setSellValue = (e) => {
 
   };
 
+  const reinvest = () => {
+   
+    dispatch(reInvest())
+
+  };
+
 
     return (
         <div>
@@ -217,13 +226,14 @@ const setSellValue = (e) => {
 
 
                 <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF", minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
-                <h1 style={{margin:"1px"}}>{balance/1000 }</h1><br/>
+                <h1 style={{margin:"1px"}}>{balance }</h1><br/>
                 <h2 style={{margin:"1px"}}>Seek Gold Credits</h2><br/>
                 <p style={{margin:"1px"}}> My Seek Gold Credit Value </p>
                 <h2>${(balance*rate/1000000000000000000*props.price).toFixed(2) }</h2>
                 </div>
            
-                <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"flex",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
+                <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
+                <div style={{display:"flex"}}>
                 <span>
                   <h2>${(dividendBalance/1000000000000000000*props.price).toFixed(2) }</h2><br/>
                   <p>Your Dividend Earnings Value: {(dividendBalance/1000000000000000000).toFixed(2) } BNB</p>
@@ -235,6 +245,11 @@ const setSellValue = (e) => {
                   <p>Your Referral Earnings Value: {referralBalance/1000000000000000000 } BNB</p>
                   <button onClick={()=>{withdrawReferral(referralBalance)}}>withdraw referral</button>
                 </span>
+                </div>
+                
+                <div>
+                <button onClick={()=>{reinvest()}}>Re-invest dividend and Referral</button>
+                </div>
                   </div>
                  
             </div>
@@ -249,9 +264,9 @@ const setSellValue = (e) => {
                 <label> Amount of BNBs <br/>
                 <input value={Puramount} type="value"            
                   onChange={({ target }) => {setPurAmount(target.value)}}/></label><br/>
-                <p>You will get { (Puramount*1000000000000000/rate*.75).toFixed(0) } number of tokens</p>
-                <p>Price BNB: {(rate/1000000000000000).toFixed(5)}</p>
-                <p>Price Dollar: ${(rate/1000000000000000*props.price).toFixed(5)}</p>
+                <p>You will get { (Puramount*1000000000000000000/rate*.75).toFixed(0) } number of tokens</p>
+                <p>Price BNB: {(rate/1000000000000000000).toFixed(4)}</p>
+                <p>Price Dollar: ${(rate/1000000000000000000*props.price).toFixed(4)}</p>
                 <button onClick={setValue}>BUY BNB CREDITS</button>
                 {/* <div>{getTxStatus()}</div> */}
                 </div>
@@ -262,9 +277,9 @@ const setSellValue = (e) => {
                   <input value={sellAmount} type="value" onChange={(e)=>{setChange(e.target.value)}}></input>
                 </label>
                 {amountExceeded? <p>You cannot sell more than your balance of {balance}</p>:
-                <p>You will get <strong>{(rate/1000000000000000*.93*sellAmount).toFixed(4)}</strong> amount of BNBs based on current price</p>}
-                <p>Price BNB: {(rate/1000000000000000).toFixed(5)}</p>
-                <p>Price Dollar: ${(rate/1000000000000000*props.price).toFixed(5)}</p>
+                <p>You will get <strong>{(Salerate/1000000000000000000*.93*sellAmount).toFixed(4)}</strong> amount of BNBs based on current price</p>}
+                <p>Price BNB: {(Salerate/1000000000000000000).toFixed(4)}</p>
+                <p>Price Dollar: ${(Salerate/1000000000000000000*props.price).toFixed(4)}</p>
                 <button disabled={amountExceeded} onClick={setSellValue}>Sell BNB CREDITS</button>
                 {/* <div>{getSellTxStatus()}</div> */}
                 </div>
