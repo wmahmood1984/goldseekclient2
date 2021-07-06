@@ -267,8 +267,8 @@ const setSellValue = (e) => {
                 <input value={Puramount} type="value"            
                   onChange={({ target }) => {setPurAmount(target.value)}}/></label><br/>
                 <p>You will get { (Puramount*1000000000000000000/rate*.75).toFixed(0) } number of tokens</p>
-                <p>Price BNB: {(rate/1000000000000000000).toFixed(4)}</p>
-                <p>Price Dollar: ${(rate/1000000000000000000*props.price).toFixed(4)}</p>
+                <p>Price BNB: {(rate/1000000000000000000).toFixed(6)}</p>
+                <p>Price Dollar: ${(rate/1000000000000000000*props.price).toFixed(6)}</p>
                 <button onClick={setValue}>BUY BNB CREDITS</button>
                 {/* <div>{getTxStatus()}</div> */}
                 </div>
@@ -280,8 +280,8 @@ const setSellValue = (e) => {
                 </label>
                 {amountExceeded? <p>You cannot sell more than your balance of {balance}</p>:
                 <p>You will get <strong>{(Salerate/1000000000000000000*.93*sellAmount).toFixed(4)}</strong> amount of BNBs based on current price</p>}
-                <p>Price BNB: {(Salerate/1000000000000000000).toFixed(4)}</p>
-                <p>Price Dollar: ${(Salerate/1000000000000000000*props.price).toFixed(4)}</p>
+                <p>Price BNB: {(Salerate/1000000000000000000).toFixed(6)}</p>
+                <p>Price Dollar: ${(Salerate/1000000000000000000*props.price).toFixed(6)}</p>
                 <button disabled={amountExceeded} onClick={setSellValue}>Sell BNB CREDITS</button>
                 {/* <div>{getSellTxStatus()}</div> */}
                 </div>
