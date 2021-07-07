@@ -9,7 +9,7 @@ export default function Footer() {
                 <img src={logo}></img>
             </div>
             <p>Contract address<a>{GoldSeek.networks["97"].address}</a></p>
-            <p>Copyright ©SEEK GOLD 2021. All rights reserved.</p>
+            <p>Copyright ©Seek BNB 2021. All rights reserved.</p>
         </div>
     )
 }

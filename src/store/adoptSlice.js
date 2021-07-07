@@ -600,6 +600,7 @@ export const initWeb3 = createAsyncThunk(
 var dividendBalance2
 var holderPersonalEth2
 var referralBalance2
+var getreferrer2
 export const balance = createAsyncThunk("balance",
     async ({contract, address})=>{
  
@@ -612,11 +613,13 @@ export const balance = createAsyncThunk("balance",
 			const saleRate = await contract.methods.SaleexistingPrice().call()
             const initialTokenPrice = await contract.methods.tokenPriceInitial_().call()
             const dividendBalance = await contract.methods.dividendBalance(address).call()
+			const getReferrer = await contract.methods._referrerMapping(address).call()
             const ReferralBalance = await contract.methods.ReferralBalance(address).call()
             const holderPersonalEth = await contract.methods._holderPersonalEth(address).call()
 			dividendBalance2 = dividendBalance
 			holderPersonalEth2 = holderPersonalEth
 			referralBalance2 = ReferralBalance
+			getreferrer2 = getReferrer;
 
 
             
@@ -633,7 +636,8 @@ export const balance = createAsyncThunk("balance",
 
 export const BuyFunction = createAsyncThunk("BuyFunction",
     async ({referrer,value})=>{
-        var tempAdd = referrer == address? '0x0000000000000000000000000000000000000000' : referrer
+ 
+		var tempAdd = getreferrer2 != '0x0000000000000000000000000000000000000000'? getreferrer2 : referrer == address? '0x0000000000000000000000000000000000000000' : referrer;
 		console.log("referrer",referrer)
 		console.log("tempadd",tempAdd)
        try {
@@ -649,7 +653,7 @@ export const SellFunction = createAsyncThunk("SellFunction",
 async ({value})=>{
     
     try {
-        const result = await SeekGoldContract.methods.sell(value).send({from : address})
+        const result = await SeekGoldContract.methods.sell(value).send({from : address, gas: 3000000})
         return result;
     } catch (error) {
         console.log("Error in Sell Function",error)
@@ -706,6 +710,17 @@ async ({value})=>{
     }
 }
 )
+export const RedeemBNB = createAsyncThunk("RedeemBNB",
+async ()=>{
+    try {
+
+        const result = await SeekGoldContract.methods.redeemBNBs().send({from : address})
+        return result;
+    } catch (error) {
+        console.log("Error in withdraw Function",error)
+    }
+}
+)
 
 
 
@@ -726,6 +741,7 @@ const adoptSlice = createSlice({
         dividendBalance:null,
         ReferralBalance:null,
         holderPersonalEth:null,
+		error: null,
 
 
     },
@@ -760,6 +776,10 @@ const adoptSlice = createSlice({
             state.PurAwait = false;
             state.toggle = !state.toggle;
         },
+		[BuyFunction.error] : (state,action)=>{
+			state.error = true;
+            state.toggle = !state.toggle;
+        },
         [BuyFunction.fulfilled] : (state,action)=>{
 			state.arrayAwait = false;
             state.PurAwait = true;
@@ -769,6 +789,10 @@ const adoptSlice = createSlice({
 
         [SellFunction.pending] : (state,action)=>{
             state.arrayAwait = true;
+            state.toggle = !state.toggle;
+        },
+		[SellFunction.error] : (state,action)=>{
+			state.error = true;
             state.toggle = !state.toggle;
         },
         [SellFunction.fulfilled] : (state,action)=>{
@@ -781,6 +805,10 @@ const adoptSlice = createSlice({
             state.arrayAwait = true;
             state.toggle = !state.toggle;
         },
+		[WHPersonalEth.error] : (state,action)=>{
+			state.error = true;
+            state.toggle = !state.toggle;
+        },
         [WHPersonalEth.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
@@ -789,6 +817,10 @@ const adoptSlice = createSlice({
 
         [WHReferral.pending] : (state,action)=>{
             state.arrayAwait = true;
+            state.toggle = !state.toggle;
+        },
+		[WHReferral.error] : (state,action)=>{
+			state.error = true;
             state.toggle = !state.toggle;
         },
         [WHReferral.fulfilled] : (state,action)=>{
@@ -800,13 +832,23 @@ const adoptSlice = createSlice({
             state.arrayAwait = true;
             state.toggle = !state.toggle;
         },
+		[WHDiv.error] : (state,action)=>{
+			state.error = true;
+            state.toggle = !state.toggle;
+        },
         [WHDiv.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
 
         },
+
+
 		[reInvest.pending] : (state,action)=>{
             state.arrayAwait = true;
+            state.toggle = !state.toggle;
+        },
+		[reInvest.error] : (state,action)=>{
+			state.error = true;
             state.toggle = !state.toggle;
         },
         [reInvest.fulfilled] : (state,action)=>{
@@ -814,8 +856,23 @@ const adoptSlice = createSlice({
             state.toggle = !state.toggle;
 
         },
-       
 
+
+		[RedeemBNB.pending] : (state,action)=>{
+            state.arrayAwait = true;
+            state.toggle = !state.toggle;
+        },
+		[RedeemBNB.error] : (state,action)=>{
+			state.error = true;
+            state.toggle = !state.toggle;
+        },
+        [RedeemBNB.fulfilled] : (state,action)=>{
+            state.arrayAwait = false;
+            state.toggle = !state.toggle;
+
+        },
+       
+//
     }
 })
 

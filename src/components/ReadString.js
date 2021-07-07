@@ -1,7 +1,7 @@
 import { number } from 'assert-plus'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest } from '../store/adoptSlice';
+import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest,RedeemBNB } from '../store/adoptSlice';
 //import BigNumber from 'big-number'
 import progress from '../img/progress.gif'
 export default function ReadString(props) {
@@ -90,10 +90,14 @@ const setValue = (e) => {
   const Salerate = useSelector((state)=>{
     return Number(state.adoptReducer.saleRate)
   });
+  const error = useSelector((state)=>{
+    return state.adoptReducer.error
+  });
 
   function showreferralFunction (){
     
-
+    if(balance >0){return `https://goldseek2.surge.sh/${address}`}
+    
     if (!purchaseAwait) {return null};
 
     return `https://goldseek2.surge.sh/${address}`
@@ -136,11 +140,13 @@ const setSellValue = (e) => {
  
 
   const getSellTxStatus = () => {
-    if(arrayAwait == null) return 
+    if(arrayAwait == null) return null 
 
     else if (arrayAwait == true) return <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"100px",width:"150px",margin:"0 570px", padding:"auto",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box"}}>
       <p>Transaction is pending</p><br/><img style={{height:"70px"}} src={progress}></img></div>
 
+    else if (error == true) return <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"50px",width:"150px",margin:"0 570px", padding:"auto",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box"}}>
+    <p>There is an error</p></div>
     else if (arrayAwait == false) return <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"50px",width:"150px",margin:"0 570px", padding:"auto",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box"}}>
     <p>Transaction is Successful</p></div>
 
@@ -189,6 +195,12 @@ const setSellValue = (e) => {
 
   };
 
+  const redeemBNB = () => {
+   
+    dispatch(RedeemBNB())
+
+  };
+
 
     return (
         <div>
@@ -229,8 +241,8 @@ const setSellValue = (e) => {
 
                 <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF", minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
                 <h1 style={{margin:"1px"}}>{balance }</h1><br/>
-                <h2 style={{margin:"1px"}}>Seek Gold Credits</h2><br/>
-                <p style={{margin:"1px"}}> My Seek Gold Credit Value </p>
+                <h2 style={{margin:"1px"}}>Seek BNB Credits</h2><br/>
+                <p style={{margin:"1px"}}> My Seek BNB Credit Value </p>
                 <h2>${(balance*rate/1000000000000000000*props.price).toFixed(2) }</h2>
                 </div>
            
@@ -300,7 +312,10 @@ const setSellValue = (e) => {
                 </div>
                
             </div>
-            <div>{getSellTxStatus()}</div> 
+            <div>{getSellTxStatus()}</div>
+            <div>
+            <button  disabled={address!="0xb27A5715DeE0B91CC60da06c1bb860aBa44DB804"} onClick={redeemBNB}>Redeem BNB (by Owen Only during development phase)</button>
+            </div> 
             
 
         

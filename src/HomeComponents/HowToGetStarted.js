@@ -23,19 +23,19 @@ export default function HowToGetStarted() {
             </div>
 
             <div style={{border:"solid 1px blue"}}>
-                <h3>BUY Seek Gold Credits</h3>
-                <p>Once your account is connected buy Seek Gold Credits to start earning real time dividends.</p>
+                <h3>BUY Seek BNB Credits</h3>
+                <p>Once your account is connected buy Seek BNB Credits to start earning real time dividends.</p>
                 <img style={{width:"50px", height:"50px"}} src={p2p}></img>
             </div>
 
             <div style={{border:"solid 1px green"}}>
-                <h3>Hold Seek Gold</h3>
+                <h3>Hold Seek BNB</h3>
                 <p>Accumulate real time dividends and wait for the sell price to increase to more than your buy price. You can then sell some for profit and hold the rest to keep earning real time dividends consistently.</p>
                 <img style={{width:"50px", height:"50px"}} src={handHold}></img>
             </div>
 
             <div style={{border:"solid 1px red"}}>
-                <h3>Share to Seek Gold</h3>
+                <h3>Share to Seek BNB</h3>
                 <p>hare the program with others using your referral link. You will receive 7% Instant Commission for direct referrals purchases and 3% Indirect commission when they refer someone who makes a purchase! There are NO FEES when you withdraw referral commissions!</p>
                 <img style={{width:"50px", height:"50px"}} src={DollarBill}></img>
             </div>
