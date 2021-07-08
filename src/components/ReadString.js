@@ -233,16 +233,17 @@ const setSellValue = (e) => {
             </div>
              
             <div style={{display:"flex"}}>
-                <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",height:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
+                <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
                 <h1>${numberWithCommas2(Number(totalethStacked/1000000000000000000*props.price))  }</h1>
+                <h2>{numberWithCommas2(Number(totalethStacked/1000000000000000000))  }{'  '}BNB</h2>
                 <h3>Total Client Capital</h3> 
                 </div>
 
 
                 <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF", minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
                 <h1 style={{margin:"1px"}}>{balance }</h1><br/>
-                <h2 style={{margin:"1px"}}>Seek BNB Credits</h2><br/>
-                <p style={{margin:"1px"}}> My Seek BNB Credit Value </p>
+                <h2 style={{margin:"1px"}}>Seek Gold Credits</h2><br/>
+                <p style={{margin:"1px"}}> My Seek Gold Credit Value </p>
                 <h2>${(balance*rate/1000000000000000000*props.price).toFixed(2) }</h2>
                 </div>
            
