@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom';
-import logo from './img/site/1610956010.png'
+import logo from './img/seekgoldbnblogo.jpg'
 import { useDispatch, useSelector } from 'react-redux';
 import { initWeb3 } from './store/adoptSlice';
 const styles = {
@@ -8,7 +8,7 @@ const styles = {
     backgroundColor:"#020C2C", 
     backgroundPosition: "0% 0%",
     color:"#ffffff",            
-    height:"87px",
+    height:"130px",
     width:"1349px",
     overflow: 'hidden',
     position: 'fixed',
@@ -40,8 +40,8 @@ export default function AppBar() {
     return (
 
         <div style={styles}>
-            <div style={{height:"59px",width:"1140px",display:"flex"}}>
-            <a href={"/"}><img style={{height:"43px",width:"285px",display:"block", backgroundPosition:"0% 0%"}} src={logo}></img></a>
+            <div style={{height:"100px",width:"1140px",display:"flex"}}>
+            <a href={"/"}><img style={{height:"150px",width:"285px",display:"block", backgroundPosition:"0% 0%", padding:"0px",margin:"0px"}} src={logo}></img></a>
             
             <div style={{height:"59px",width:"855px",display:"flex"}}>
             <Link style={boxstyle} to="HowItWorks">How It Works</Link>{'   '}
