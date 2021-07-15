@@ -1,7 +1,7 @@
 import { number } from 'assert-plus'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { balance,BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest,RedeemBNB } from '../store/adoptSlice';
+import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest,RedeemBNB } from '../store/adoptSlice';
 //import BigNumber from 'big-number'
 import progress from '../img/progress.gif'
 export default function ReadString(props) {
@@ -18,6 +18,7 @@ export default function ReadString(props) {
     const balance = useSelector((state)=>{
       return Number(state.adoptReducer.balance);
     });
+
 
     const address = useSelector((state)=>{
       return state.adoptReducer.address;
@@ -36,7 +37,7 @@ export default function ReadString(props) {
     const dividendBalance = useSelector((state)=>{
       return Number(state.adoptReducer.dividendBalance);
     });
-
+    console.log("balance",dividendBalance)
    
 
     const referralBalance = useSelector((state)=>{

@@ -723,7 +723,7 @@ export const BuyFunction = createAsyncThunk("BuyFunction",
 		console.log("referrer",referrer)
 		console.log("tempadd",tempAdd)
        try {
-            const result = await SeekGoldContract.methods.buy(tempAdd).send({from : address, value: web3.utils.toWei(value,"ether")})
+            const result = await SeekGoldContract.methods.buy(tempAdd).send({from : address, value: web3.utils.toWei(value,"ether"), gas: 3000000})
             return result;
         } catch (error) {
             console.log("Error in BUy Function",error)
@@ -842,7 +842,7 @@ const adoptSlice = createSlice({
          },
 
          [balance.fulfilled] : (state,action)=>{
-            state.balance = action.payload.balance;
+            state.balance = action.payload.balance1;
             state.ethStaked=action.payload.ethStaked;
             state.rate=action.payload.rate;
             state.initialTokenPrice=action.payload.initialTokenPrice;
