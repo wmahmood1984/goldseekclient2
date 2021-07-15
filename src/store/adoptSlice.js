@@ -5,32 +5,6 @@ import BigNumber from 'big-number'
 
 const abi = [
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "referrer",
-				"type": "address"
-			}
-		],
-		"name": "buy",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "number",
-				"type": "uint256"
-			}
-		],
-		"name": "sell",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -93,45 +67,6 @@ const abi = [
 		"type": "event"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawDividend",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawPersonalEth",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "amount",
-				"type": "uint256"
-			}
-		],
-		"name": "withdrawrReferral",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -168,6 +103,141 @@ const abi = [
 		],
 		"name": "WithdrawrReferral",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "DivSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "DividendLargerPool",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "DividendPool",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "holder",
+				"type": "address"
+			}
+		],
+		"name": "ReferralBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "SaleexistingPrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "TotalEthStaked",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "TotalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "_ReferralCommission",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "_divCredits",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -247,25 +317,6 @@ const abi = [
 				"type": "address"
 			}
 		],
-		"name": "_ReferralCommission",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
 		"name": "_referrerMapping",
 		"outputs": [
 			{
@@ -309,24 +360,24 @@ const abi = [
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "referrer",
+				"type": "address"
+			}
+		],
+		"name": "buy",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "holder",
 				"type": "address"
 			}
 		],
 		"name": "dividendBalance",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "DividendPool",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -459,14 +510,35 @@ const abi = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "redeemBNBs",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "reinvest",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "holder",
-				"type": "address"
+				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
 			}
 		],
-		"name": "ReferralBalance",
+		"name": "sell",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "tTransferPUblic",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -505,45 +577,6 @@ const abi = [
 	},
 	{
 		"inputs": [],
-		"name": "TotalEthStaked",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "TotalSupply",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "tTransferPUblic",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "valueforSale",
 		"outputs": [
 			{
@@ -553,6 +586,52 @@ const abi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawDividend",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawPersonalEth",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "withdrawrReferral",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "withdrawrReferralAdmin",
+		"outputs": [],
+		"stateMutability": "payable",
 		"type": "function"
 	}
 ]
@@ -567,16 +646,18 @@ var address
 export const initWeb3 = createAsyncThunk(
     "InitWeb3",
     async(a,thunkApi)=>{
-        
+    
 
         try {
             if(Web3.givenProvider){ 
                 web3 = new Web3(Web3.givenProvider);
+			
                 await Web3.givenProvider.enable()
                 const networkId = await web3.eth.net.getId()
-                const SeekGoldAddress = GoldSeek.networks[networkId].address
-                var contract = new web3.eth.Contract(GoldSeek.abi, SeekGoldAddress);
-                SeekGoldContract = contract;
+				const SeekGoldAddress = GoldSeek.networks[networkId].address
+				var contract = new web3.eth.Contract(GoldSeek.abi, SeekGoldAddress);
+                
+				SeekGoldContract = contract;
                 const addresses = await web3.eth.getAccounts()
                 address = addresses[0];
                 thunkApi.dispatch(balance({
@@ -601,18 +682,19 @@ var dividendBalance2
 var holderPersonalEth2
 var referralBalance2
 var getreferrer2
-export const balance = createAsyncThunk("balance",
-    async ({contract, address})=>{
- 
 
+export const balance = createAsyncThunk("balance",
+    async ({contract,address})=>{
+
+		
         try {
 
-            const balance = await contract.methods._holderBalances(address).call()
+            const balance1 = await contract.methods._holderBalances(address).call()
             const ethStaked = await contract.methods.TotalEthStaked().call()
             const rate = await contract.methods.existingPrice().call()
 			const saleRate = await contract.methods.SaleexistingPrice().call()
             const initialTokenPrice = await contract.methods.tokenPriceInitial_().call()
-            const dividendBalance = await contract.methods.dividendBalance(address).call()
+			const dividendBalance = await contract.methods.dividendBalance(address).call()
 			const getReferrer = await contract.methods._referrerMapping(address).call()
             const ReferralBalance = await contract.methods.ReferralBalance(address).call()
             const holderPersonalEth = await contract.methods._holderPersonalEth(address).call()
@@ -622,8 +704,8 @@ export const balance = createAsyncThunk("balance",
 			getreferrer2 = getReferrer;
 
 
-            
-            return {balance,ethStaked,rate,saleRate,initialTokenPrice,dividendBalance,ReferralBalance,holderPersonalEth}
+			//return {balance1,ethStaked,rate,saleRate,initialTokenPrice,dividendBalance};
+             return {balance1,ethStaked,rate,saleRate,initialTokenPrice,dividendBalance, ReferralBalance,holderPersonalEth}
 
         } catch (error) {
             console.log("Error in ArrayThunk",error)

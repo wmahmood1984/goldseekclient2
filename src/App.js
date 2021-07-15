@@ -9,7 +9,7 @@ import HowItWorks from './HomeComponents/HowItWorks';
 import Footer from './Footer';
 import HowToGetStarted from './HomeComponents/HowToGetStarted';
 import { useDispatch, useSelector } from 'react-redux';
-import { initWeb3,loadArray } from './store/adoptSlice';
+import { balance,initWeb3,loadArray } from './store/adoptSlice';
 
 function App() {
  
@@ -23,6 +23,7 @@ function App() {
   useEffect(() => {
 
     dispatch(initWeb3())
+    dispatch(balance())
 
 
 //    axios.get("https://api.pancakeswap.info/api/tokens/0x2170Ed0880ac9A755fd29B2688956BD959F933F8")

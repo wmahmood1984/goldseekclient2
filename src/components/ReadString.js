@@ -1,7 +1,7 @@
 import { number } from 'assert-plus'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest,RedeemBNB } from '../store/adoptSlice';
+import { balance,BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest,RedeemBNB } from '../store/adoptSlice';
 //import BigNumber from 'big-number'
 import progress from '../img/progress.gif'
 export default function ReadString(props) {
