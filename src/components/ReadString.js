@@ -37,7 +37,6 @@ export default function ReadString(props) {
     const dividendBalance = useSelector((state)=>{
       return Number(state.adoptReducer.dividendBalance);
     });
-    console.log("balance",dividendBalance)
    
 
     const referralBalance = useSelector((state)=>{
@@ -134,7 +133,7 @@ function setChange(amount){
 
 const setSellValue = (e) => {
   e.preventDefault()
-  dispatch(SellFunction({value: sellAmount}))
+  dispatch(SellFunction({value: sellAmount-1}))
   setSellAmount("")
 
   };
@@ -252,13 +251,13 @@ const setSellValue = (e) => {
                 <div style={{display:"flex"}}>
                 <span>
                   <h2>${(dividendBalance/1000000000000000000*props.price).toFixed(2) }</h2><br/>
-                  <p>Your Dividend Earnings Value: {(dividendBalance/1000000000000000000).toFixed(2) } BNB</p>
+                  <p>Your Dividend Earnings Value: {(dividendBalance/1000000000000000000).toFixed(4) } BNB</p>
                   <button onClick={()=>{withdrawDividend(dividendBalance)}}>withdraw Dividend</button>
                 
                 </span>
                 <span>
                   <h2>${(referralBalance/1000000000000000000*props.price).toFixed(2) }</h2><br/>
-                  <p>Your Referral Earnings Value: {referralBalance/1000000000000000000 } BNB</p>
+                  <p>Your Referral Earnings Value: {(referralBalance/1000000000000000000).toFixed(4) } BNB</p>
                   <button onClick={()=>{withdrawReferral(referralBalance)}}>withdraw referral</button>
                 </span>
                 </div>

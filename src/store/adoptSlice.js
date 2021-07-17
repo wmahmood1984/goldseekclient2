@@ -665,10 +665,16 @@ export const initWeb3 = createAsyncThunk(
                     address: address
 
                 }))
+				thunkApi.dispatch(divBalance({
+                    contract: SeekGoldContract,
+                    address: address
+
+                }))
                 return {
                     web3,
                     contract,
                     address,
+					SeekGoldAddress,
                                                        }
             }else {console.log("error in loading web3")}
         } catch (error) {
@@ -694,21 +700,38 @@ export const balance = createAsyncThunk("balance",
             const rate = await contract.methods.existingPrice().call()
 			const saleRate = await contract.methods.SaleexistingPrice().call()
             const initialTokenPrice = await contract.methods.tokenPriceInitial_().call()
-			const dividendBalance = await contract.methods.dividendBalance(address).call()
+			//const dividendBalance = await contract.methods.dividendBalance(address).call()
 			const getReferrer = await contract.methods._referrerMapping(address).call()
             const ReferralBalance = await contract.methods.ReferralBalance(address).call()
             const holderPersonalEth = await contract.methods._holderPersonalEth(address).call()
-			dividendBalance2 = dividendBalance
+			//dividendBalance2 = dividendBalance
 			holderPersonalEth2 = holderPersonalEth
 			referralBalance2 = ReferralBalance
 			getreferrer2 = getReferrer;
 
 
-			//return {balance1,ethStaked,rate,saleRate,initialTokenPrice,dividendBalance};
-             return {balance1,ethStaked,rate,saleRate,initialTokenPrice,dividendBalance, ReferralBalance,holderPersonalEth}
+
+             return {balance1,ethStaked,rate,saleRate,initialTokenPrice, ReferralBalance,holderPersonalEth}
 
         } catch (error) {
             console.log("Error in ArrayThunk",error)
+        }
+    }
+    )
+
+export const divBalance = createAsyncThunk("divBalance",
+    async ({contract,address})=>{
+
+		console.log("bal",contract.methods.dividendBalance(address))
+        try {
+
+			const dividendBalance = await contract.methods.dividendBalance(address).call()
+			dividendBalance2 = dividendBalance
+			
+             return dividendBalance
+
+        } catch (error) {
+            console.log("Error in dividendBalance",error)
         }
     }
     )
@@ -824,6 +847,7 @@ const adoptSlice = createSlice({
         ReferralBalance:null,
         holderPersonalEth:null,
 		error: null,
+		SeekGoldAddress: null,
 
 
     },
@@ -837,6 +861,7 @@ const adoptSlice = createSlice({
             state.web3 = action.payload.web3;
             state.SeekGoldContract = action.payload.SeekGoldContract;
             state.address = action.payload.address;
+			state.SeekGoldAddress = action.payload.SeekGoldAddress;
 
 
          },
@@ -846,10 +871,15 @@ const adoptSlice = createSlice({
             state.ethStaked=action.payload.ethStaked;
             state.rate=action.payload.rate;
             state.initialTokenPrice=action.payload.initialTokenPrice;
-            state.dividendBalance=action.payload.dividendBalance;
+        
             state.ReferralBalance=action.payload.ReferralBalance;
             state.holderPersonalEth=action.payload.holderPersonalEth;
             state.saleRate = action.payload.saleRate;
+		},
+
+		[divBalance.fulfilled] : (state,action)=>{
+			state.dividendBalance = action.payload;
+
 		},
 
        
