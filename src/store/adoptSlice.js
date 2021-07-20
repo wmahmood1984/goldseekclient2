@@ -700,7 +700,7 @@ export const balance = createAsyncThunk("balance",
             const rate = await contract.methods.existingPrice().call()
 			const saleRate = await contract.methods.SaleexistingPrice().call()
             const initialTokenPrice = await contract.methods.tokenPriceInitial_().call()
-			//const dividendBalance = await contract.methods.dividendBalance(address).call()
+			const AccountBalance = await contract.methods.AccountBalance().call()
 			const getReferrer = await contract.methods._referrerMapping(address).call()
             const ReferralBalance = await contract.methods.ReferralBalance(address).call()
             const holderPersonalEth = await contract.methods._holderPersonalEth(address).call()
@@ -711,7 +711,7 @@ export const balance = createAsyncThunk("balance",
 
 
 
-             return {balance1,ethStaked,rate,saleRate,initialTokenPrice, ReferralBalance,holderPersonalEth}
+             return {balance1,ethStaked,rate,saleRate,initialTokenPrice, AccountBalance, ReferralBalance,holderPersonalEth}
 
         } catch (error) {
             console.log("Error in ArrayThunk",error)
@@ -848,6 +848,7 @@ const adoptSlice = createSlice({
         holderPersonalEth:null,
 		error: null,
 		SeekGoldAddress: null,
+		AccountBalance: null,
 
 
     },
@@ -871,7 +872,7 @@ const adoptSlice = createSlice({
             state.ethStaked=action.payload.ethStaked;
             state.rate=action.payload.rate;
             state.initialTokenPrice=action.payload.initialTokenPrice;
-        
+			state.AccountBalance = action.payload.AccountBalance;
             state.ReferralBalance=action.payload.ReferralBalance;
             state.holderPersonalEth=action.payload.holderPersonalEth;
             state.saleRate = action.payload.saleRate;
