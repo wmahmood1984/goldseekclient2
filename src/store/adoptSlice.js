@@ -770,7 +770,7 @@ export const WHPersonalEth = createAsyncThunk("WHPersonalEth",
 async ({value})=>{
     console.log("per",value)
     try {
-        const result = await SeekGoldContract.methods.withdrawPersonalEth(holderPersonalEth2).send({from : address})
+        const result = await SeekGoldContract.methods.withdrawPersonalEth(holderPersonalEth2).send({from : address, gas: 3000000})
         return result;
     } catch (error) {
         console.log("Error in withdraw Function",error)

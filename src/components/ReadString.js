@@ -250,7 +250,7 @@ const setSellValue = (e) => {
                 <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
                 <div style={{display:"flex"}}>
                 <span>
-                  <h2>${ (dividendBalance/1000000000000000000*props.price).toFixed(2) }</h2><br/>
+                  <h2>${(dividendBalance/1000000000000000000*props.price).toFixed(2) }</h2><br/>
                   <p>Your Dividend Earnings Value: {(dividendBalance/1000000000000000000).toFixed(4) } BNB</p>
                   <button onClick={()=>{withdrawDividend(dividendBalance)}}>withdraw Dividend</button>
                 
