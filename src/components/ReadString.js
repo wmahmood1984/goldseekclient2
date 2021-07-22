@@ -70,7 +70,7 @@ export default function ReadString(props) {
 }
 
 function numberWithCommas2(x) {
-    var y = x.toFixed(1)
+    var y = x.toFixed(4)
   return y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",").slice(0, 7);
 }
 
