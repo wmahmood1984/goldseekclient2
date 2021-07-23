@@ -201,6 +201,8 @@ const setSellValue = (e) => {
 
   };
 
+  if(!balance){return "Loading..."}
+
 
     return (
         <div>
