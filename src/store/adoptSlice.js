@@ -696,7 +696,7 @@ export const balance = createAsyncThunk("balance",
         try {
 
             const balance1 = await contract.methods._holderBalances(address).call()
-            const ethStaked = await contract.methods.AccountBalance().call()
+            const ethStaked = await contract.methods.EthStaked().call()
             const rate = await contract.methods.existingPrice().call()
 			const saleRate = await contract.methods.SaleexistingPrice().call()
             const initialTokenPrice = await contract.methods.tokenPriceInitial_().call()
