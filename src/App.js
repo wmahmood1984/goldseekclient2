@@ -9,7 +9,7 @@ import HowItWorks from './HomeComponents/HowItWorks';
 import Footer from './Footer';
 import HowToGetStarted from './HomeComponents/HowToGetStarted';
 import { useDispatch, useSelector } from 'react-redux';
-import { balance,initWeb3,loadArray } from './store/adoptSlice';
+import { balance,initWeb3,ethStaked1,rate1,saleRate1,initialTokenPrice1,AccountBalance1,getReferrer1,ReferralBalance1,divBalance,holderPersonalEth1 } from './store/adoptSlice';
 
 function App() {
  
@@ -24,6 +24,15 @@ function App() {
 
     dispatch(initWeb3())
     dispatch(balance())
+    dispatch(ethStaked1())
+    dispatch(rate1())
+    dispatch(saleRate1())
+    dispatch(initialTokenPrice1())
+    dispatch(AccountBalance1())
+    dispatch(getReferrer1())
+    dispatch(ReferralBalance1())
+    dispatch(holderPersonalEth1())
+    dispatch(divBalance())
 
 
 //    axios.get("https://api.pancakeswap.info/api/tokens/0x2170Ed0880ac9A755fd29B2688956BD959F933F8")

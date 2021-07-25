@@ -1,7 +1,7 @@
 import { number } from 'assert-plus'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest,RedeemBNB } from '../store/adoptSlice';
+import { BuyFunction,SellFunction,WHPersonalEth,WHReferral,WHDiv,reInvest,RedeemBNB,balance } from '../store/adoptSlice';
 //import BigNumber from 'big-number'
 import progress from '../img/progress.gif'
 export default function ReadString(props) {
@@ -70,7 +70,7 @@ export default function ReadString(props) {
 }
 
 function numberWithCommas2(x) {
-    var y = x.toFixed(1)
+    var y = x.toFixed(2)
   return y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",").slice(0, 7);
 }
 
@@ -201,7 +201,7 @@ const setSellValue = (e) => {
 
   };
 
-  if(!balance){return "Loading..."}
+
 
 
     return (
@@ -246,7 +246,7 @@ const setSellValue = (e) => {
                 <h1 style={{margin:"1px"}}>{balance>1? balance:0 }</h1><br/>
                 <h2 style={{margin:"1px"}}>Seek Gold Credits</h2><br/>
                 <p style={{margin:"1px"}}> My Seek Gold Credit Value </p>
-                <h2>${ (balance*rate/1000000000000000000).toFixed(2) }</h2>
+                <h2>BNB{ (balance*rate/1000000000000000000).toFixed(2) }</h2>
                 </div>
            
                 <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"149px",width:"360px",margin:"0 0 24px 0", padding:"30px 0 40px 0",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box",margin:"30px"}}>
