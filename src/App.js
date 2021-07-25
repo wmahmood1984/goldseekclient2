@@ -15,6 +15,7 @@ function App() {
  
 
   const [price, setPrice] = useState()
+  const [chainID, setChainID] = useState()
   const dispatch = useDispatch()
 
   const toggle = useSelector((state)=>{
@@ -48,9 +49,9 @@ function App() {
         //   // Catch and print errors if any
            .catch(error => console.error('On create student error', error));
 
-           
+  setChainID(window.ethereum.networkVersion)          
 
-  }, [toggle])
+  }, [toggle,chainID])
 
 
 
@@ -58,7 +59,7 @@ function App() {
   return (
     
     <div className="App">
-<AppBar ></AppBar>
+<AppBar chainID={chainID}></AppBar>
 <Routes >
   <Route path="/" element={<Home price={price}></Home>}></Route>
   <Route path="/:referrer" element={<Home price={price}></Home>}></Route>
