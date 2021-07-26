@@ -189,11 +189,11 @@ const setSellValue = (e) => {
 
   };
 
-  const reinvest = () => {
+  // const reinvest = () => {
    
-    dispatch(reInvest())
+  //   dispatch(reInvest())
 
-  };
+  // };
 
   const redeemBNB = () => {
    
@@ -264,9 +264,7 @@ const setSellValue = (e) => {
                 </span>
                 </div>
                 
-                <div>
-                <button onClick={()=>{reinvest()}}>Re-invest dividend and Referral</button>
-                </div>
+   
                   </div>
                  
             </div>
