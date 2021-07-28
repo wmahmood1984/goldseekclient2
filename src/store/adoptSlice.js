@@ -647,7 +647,7 @@ export const initWeb3 = createAsyncThunk(
 			
                 await Web3.givenProvider.enable()
                 const networkId = await web3.eth.net.getId()
-				const SeekGoldAddress = "0x9416eA23FC57fe967B837fC7f5FDE3Ab81d30906"
+				const SeekGoldAddress = "0xb292292933E5e5a066A503e484DF537142d81fbF"
 				var contract = new web3.eth.Contract(abi, SeekGoldAddress);
                 
 				SeekGoldContract = contract;
