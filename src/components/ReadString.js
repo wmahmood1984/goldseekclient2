@@ -96,11 +96,11 @@ const setValue = (e) => {
 
   function showreferralFunction (){
     
-    if(balance >0){return `https://goldseek2.surge.sh/${address}`}
+    if(balance >0){return `https://seekgold.club/${address}`}
     
     if (!purchaseAwait) {return null};
 
-    return `https://goldseek2.surge.sh/${address}`
+    return `https://seekgold.club/${address}`
     
   }
 
