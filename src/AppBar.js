@@ -42,7 +42,7 @@ export default function AppBar(props) {
     return (
 
         <div style={styles}>
-            {props.chainID==="97"? <div style={{height:"100px",width:"1140px",display:"flex"}}>
+            <div style={{height:"100px",width:"1140px",display:"flex"}}>
             <a href={"/"}><img style={{height:"150px",width:"285px",display:"block", backgroundPosition:"0% 0%", padding:"0px",margin:"0px"}} src={logo}></img></a>
             
             <div style={{height:"59px",width:"855px",display:"flex"}}>
@@ -51,9 +51,7 @@ export default function AppBar(props) {
             <div style={boxstyle}>{address}</div>
             </div>
             
-            </div>:
-            
-            <div style={{color:"red", fontSize:"35px", margin:"auto", alignContent:"center" }}>You are not currently using BSC TestNet. Please shift your network to BSC Testnet and refresh the page</div>}
+            </div>
             
             
             

@@ -11,7 +11,7 @@ export default function HowToGetStarted() {
             <h1>How To Get Started</h1>
             <div style={{border:"solid 1px green"}}>
                 <h3>Fund your Metamask Wallet</h3>
-                <p>Add EThereum to your wallet and make sure you leave enough extra to cover the transaction fees.</p>
+                <p>Add BNB to your wallet and make sure you leave enough extra to cover the transaction fees.</p>
                 <img style={{width:"50px", height:"50px"}} src={metaMask}></img>
             </div>
 

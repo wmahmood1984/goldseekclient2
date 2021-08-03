@@ -195,11 +195,11 @@ const setSellValue = (e) => {
 
   // };
 
-  const redeemBNB = () => {
+  // const redeemBNB = () => {
    
-    dispatch(RedeemBNB())
+  //   dispatch(RedeemBNB())
 
-  };
+  // };
 
 
 
@@ -315,9 +315,7 @@ const setSellValue = (e) => {
                
             </div>
             <div>{getSellTxStatus()}</div>
-            <div>
-            <button  disabled={address!="0xb27A5715DeE0B91CC60da06c1bb860aBa44DB804"} onClick={redeemBNB}>Redeem BNB (by Owen Only during development phase)</button>
-            </div> 
+            
             
 
         
