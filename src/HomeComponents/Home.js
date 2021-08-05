@@ -58,7 +58,7 @@ export default function Home(props) {
             <div style={{display:"flex"}}>
             <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb(255,255,255)",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2C",backgroundPosition:"0% 0%",height:"605px",width:"306px",color:"#ffffff",padding:"34px 22px 34px 22px",display:"block",margin:"30px"}}>
                 <h3>Real Time Dividends</h3>
-                <p>You get paid real time dividends when depositors buy, sell and transfer Seek Gold. The fee to buy Seek Gold is 17%. You will see 17?ducted immediately along with commissions and the platform fee. As soon as you deposit,10% is distributed immediately to all Seek Gold Holders including you. When you sell 7% is released to all Seek Gold Holders as well.The process of handling all funds including the distribution of BNB is completely managed by the immutable smart contract. There is no company, ceo or entity to run off with your money.</p>
+                <p>You get paid real time dividends when depositors buy and sell Seek Gold. The fee to buy Seek Gold is 25%. The fee is distributed in the following manner, 10% is distributed immediately to all Seek Gold Holders including you, 10% is paid in commission to the two upline referrers and 5% is the admin fee. When you sell your seek gold credits 7% is released to all Seek Gold Holders as well.</p>
             </div>
 
             <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb(255,255,255)",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2C",backgroundPosition:"0% 0%",height:"605px",width:"306px",color:"#ffffff",padding:"34px 22px 34px 22px",display:"block",margin:"30px"}}>
