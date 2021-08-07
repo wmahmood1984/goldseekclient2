@@ -28,6 +28,11 @@ export default function ReadString(props) {
       return Number(state.adoptReducer.ethStaked);
     });
 
+    const error1 = useSelector((state)=>{
+      return state.adoptReducer.error;
+    });
+    console.log("error in read",error1)
+
 
 
     const rate = useSelector((state)=>{
@@ -90,9 +95,7 @@ const setValue = (e) => {
   const Salerate = useSelector((state)=>{
     return Number(state.adoptReducer.saleRate)
   });
-  const error = useSelector((state)=>{
-    return state.adoptReducer.error
-  });
+
 
   function showreferralFunction (){
     
@@ -145,8 +148,8 @@ const setSellValue = (e) => {
     else if (arrayAwait == true) return <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"100px",width:"150px",margin:"0 570px", padding:"auto",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box"}}>
       <p>Transaction is pending</p><br/><img style={{height:"70px"}} src={progress}></img></div>
 
-    else if (error == true) return <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"50px",width:"150px",margin:"0 570px", padding:"auto",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box"}}>
-    <p>There is an error</p></div>
+    else if (error1) return <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"50px",width:"150px",margin:"0 570px", padding:"auto",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box"}}>
+    <p>{error1.message}</p></div>
     else if (arrayAwait == false) return <div style={{fontFamily:"sans-serif",fontSize:"16px",lineHeight:"24px",textDecoration:"none solid rgb",textAlign:"center",wordSpacing:"0px",backgroundColor:"#020C2c",backgroundPosition:"0% 0%",color:"#FFFFFF",minHeight:"50px",width:"150px",margin:"0 570px", padding:"auto",display:"block",transform:"none",transition:"all 0s ease 0s", boxSizing:"border-box"}}>
     <p>Transaction is Successful</p></div>
 

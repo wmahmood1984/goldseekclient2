@@ -640,7 +640,7 @@ export const initWeb3 = createAsyncThunk(
 			
                 await Web3.givenProvider.enable()
                 const networkId = await web3.eth.net.getId()
-				const SeekGoldAddress = "0x0Aa897529889B6386FC1F75582F1b2F848D620B2"
+				const SeekGoldAddress = "0x5aCF7E94E662ebEA4CE7F9934F627157872429EC"
 				var contract = new web3.eth.Contract(abi, SeekGoldAddress);
                 
 				SeekGoldContract = contract;
@@ -909,6 +909,7 @@ export const BuyFunction = createAsyncThunk("BuyFunction",
             return result;
         } catch (error) {
             console.log("Error in BUy Function",error)
+			return error;
         }
     }
     )
@@ -921,6 +922,7 @@ async ({value})=>{
         return result;
     } catch (error) {
         console.log("Error in Sell Function",error)
+		return error;
     }
 }
 )
@@ -933,6 +935,7 @@ async ({value})=>{
         return result;
     } catch (error) {
         console.log("Error in withdraw Function",error)
+		return error;
     }
 }
 )
@@ -946,6 +949,7 @@ async ({value})=>{
         return result;
     } catch (error) {
         console.log("Error in withdraw Function",error)
+		return error;
     }
 }
 )
@@ -958,6 +962,7 @@ async ()=>{
         return result;
     } catch (error) {
         console.log("Error in withdraw Function",error)
+		return error;
     }
 }
 )
@@ -971,6 +976,7 @@ async ({value})=>{
         return result;
     } catch (error) {
         console.log("Error in withdraw Function",error)
+		return error;
     }
 }
 )
@@ -982,6 +988,7 @@ async ()=>{
         return result;
     } catch (error) {
         console.log("Error in withdraw Function",error)
+		return error;
     }
 }
 )
@@ -1006,6 +1013,7 @@ const adoptSlice = createSlice({
         ReferralBalance:null,
         holderPersonalEth:null,
 		error: null,
+		errorMessage: null,
 		SeekGoldAddress: null,
 		AccountBalance: null,
 
@@ -1071,21 +1079,26 @@ const adoptSlice = createSlice({
 			state.arrayAwait = true;
             state.PurAwait = false;
             state.toggle = !state.toggle;
+			state.error = null;
         },
-		[BuyFunction.error] : (state,action)=>{
-			state.error = true;
-            state.toggle = !state.toggle;
-        },
+		// [BuyFunction.rejected] : (state,action)=>{
+		// 	state.error = true;
+		// 	state.errorMessage = action.payload;
+        //     state.toggle = !state.toggle;
+		// 	console.log("buy rejected",action.payload)
+        // },
         [BuyFunction.fulfilled] : (state,action)=>{
 			state.arrayAwait = false;
             state.PurAwait = true;
             state.toggle = !state.toggle;
+			state.error = action.payload.blockHash?  null:action.payload;
 
         },
 
         [SellFunction.pending] : (state,action)=>{
             state.arrayAwait = true;
             state.toggle = !state.toggle;
+			state.error = null;
         },
 		[SellFunction.error] : (state,action)=>{
 			state.error = true;
@@ -1094,12 +1107,14 @@ const adoptSlice = createSlice({
         [SellFunction.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
+			state.error = action.payload.blockHash?  null:action.payload;
 
         },
 
         [WHPersonalEth.pending] : (state,action)=>{
             state.arrayAwait = true;
             state.toggle = !state.toggle;
+			state.error = null;
         },
 		[WHPersonalEth.error] : (state,action)=>{
 			state.error = true;
@@ -1108,12 +1123,14 @@ const adoptSlice = createSlice({
         [WHPersonalEth.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
+			state.error = action.payload.blockHash?  null:action.payload;
 
         },
 
         [WHReferral.pending] : (state,action)=>{
             state.arrayAwait = true;
             state.toggle = !state.toggle;
+			state.error = null;
         },
 		[WHReferral.error] : (state,action)=>{
 			state.error = true;
@@ -1122,11 +1139,13 @@ const adoptSlice = createSlice({
         [WHReferral.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
+			state.error = action.payload.blockHash?  null:action.payload;
 
         },
         [WHDiv.pending] : (state,action)=>{
             state.arrayAwait = true;
             state.toggle = !state.toggle;
+			state.error = null;
         },
 		[WHDiv.error] : (state,action)=>{
 			state.error = true;
@@ -1135,6 +1154,7 @@ const adoptSlice = createSlice({
         [WHDiv.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
+			state.error = action.payload.blockHash?  null:action.payload;
 
         },
 
@@ -1142,6 +1162,7 @@ const adoptSlice = createSlice({
 		[reInvest.pending] : (state,action)=>{
             state.arrayAwait = true;
             state.toggle = !state.toggle;
+			state.error = null;
         },
 		[reInvest.error] : (state,action)=>{
 			state.error = true;
@@ -1150,6 +1171,7 @@ const adoptSlice = createSlice({
         [reInvest.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
+			state.error = action.payload.blockHash?  null:action.payload;
 
         },
 
@@ -1157,6 +1179,7 @@ const adoptSlice = createSlice({
 		[RedeemBNB.pending] : (state,action)=>{
             state.arrayAwait = true;
             state.toggle = !state.toggle;
+			state.error = null;
         },
 		[RedeemBNB.error] : (state,action)=>{
 			state.error = true;
@@ -1165,6 +1188,7 @@ const adoptSlice = createSlice({
         [RedeemBNB.fulfilled] : (state,action)=>{
             state.arrayAwait = false;
             state.toggle = !state.toggle;
+			state.error = action.payload.blockHash?  null:action.payload;
 
         },
        
