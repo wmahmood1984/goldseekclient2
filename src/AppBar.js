@@ -38,20 +38,27 @@ export default function AppBar(props) {
         return state.adoptReducer.address;
       });
 
+      const web3 = useSelector((state)=>{
+        return state.adoptReducer.web3;
+      });
+
     
     return (
 
         <div style={styles}>
-            <div style={{height:"100px",width:"1140px",display:"flex"}}>
-            <a href={"/"}><img style={{height:"150px",width:"285px",display:"block", backgroundPosition:"0% 0%", padding:"0px",margin:"0px"}} src={logo}></img></a>
-            
-            <div style={{height:"59px",width:"855px",display:"flex"}}>
-            <Link style={boxstyle} to="HowItWorks">How It Works</Link>{'   '}
-            <Link style={boxstyle} to="HowToGetStarted">How To Get Started</Link>{'   '}
-            <div style={boxstyle}>{address}</div>
-            </div>
-            
-            </div>
+            {web3? 
+         <div style={{height:"100px",width:"1140px",display:"flex"}}>
+         <a href={"/"}><img style={{height:"150px",width:"285px",display:"block", backgroundPosition:"0% 0%", padding:"0px",margin:"0px"}} src={logo}></img></a>
+         
+         <div style={{height:"59px",width:"855px",display:"flex"}}>
+         <Link style={boxstyle} to="HowItWorks">How It Works</Link>{'   '}
+         <Link style={boxstyle} to="HowToGetStarted">How To Get Started</Link>{'   '}
+         <div style={boxstyle}>{address}</div>
+         </div>
+         </div>: <div style={{color:"red"}}><strong>
+             You are not onnected with a wallet. please visit via wallet browser</strong></div>    
+        }
+           
             
             
             

@@ -704,7 +704,8 @@ export const initWeb3 = createAsyncThunk(
                     address,
 					SeekGoldAddress,
                                                        }
-            }else {console.log("error in loading web3")}
+            }else {console.log("error in loading web3")
+					return {web3:null,contract:null,address:null,SeekGoldAddress:null}}
         } catch (error) {
             console.log("Error", error)
         }
